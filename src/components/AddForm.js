@@ -21,7 +21,8 @@ const AddForm = () => {
    ******************************************************/
 
   const fetchToDoList = async () => {
-    await axiosConfig.get("/getToDos/" + toDoState + "/" + toDoDate, {
+    await axiosConfig
+      .get("/todolist/getToDos/" + toDoState + "/" + toDoDate, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
@@ -58,7 +59,7 @@ const AddForm = () => {
       title: toDo,
     };
     await axiosConfig
-      .post("/createToDo", postData, {
+      .post("/todolist/createToDo", postData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {

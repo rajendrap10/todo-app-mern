@@ -23,7 +23,7 @@ const ToDoList = () => {
     const fetchToDoList = async () => {
       if(token) {
               await axiosConfig
-                .get("/getToDos/" + toDoState + "/" + toDoDate, {
+                .get("/todolist/getToDos/" + toDoState + "/" + toDoDate, {
                   headers: { Authorization: `Bearer ${token}` },
                 })
                 .then(function (response) {
@@ -51,7 +51,7 @@ const ToDoList = () => {
     const delteToDo = async (_id) => {
       if(_id) {
         await axiosConfig
-          .delete("deleteToDo/" + _id, {
+          .delete("/todolist/deleteToDo/" + _id, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
@@ -83,7 +83,7 @@ const ToDoList = () => {
           title:updateValue
         }
         await axiosConfig
-          .put("editToDo", updateData, {
+          .put("/todolist/editToDo", updateData, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
@@ -114,7 +114,7 @@ const ToDoList = () => {
           isDone:target.checked
         }
         await axiosConfig
-          .put("toDoDone", data, {
+          .put("/todolist/toDoDone", data, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
