@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios'
 import { Context } from "../Context";
 import { toast } from 'react-toastify';
+import axiosConfig from "../utils/axiosConfig";
 
 const AddForm = () => {
 
@@ -20,8 +21,7 @@ const AddForm = () => {
    ******************************************************/
 
   const fetchToDoList = async () => {
-    await axios
-      .get("/getToDos/" + toDoState + "/" + toDoDate, {
+    await axiosConfig.get("/getToDos/" + toDoState + "/" + toDoDate, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
@@ -57,7 +57,7 @@ const AddForm = () => {
     let postData = {
       title: toDo,
     };
-    await axios
+    await axiosConfig
       .post("/createToDo", postData, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -92,8 +92,6 @@ const AddForm = () => {
               onChange={(e) => setToDo(e.target.value)}
               value={toDo}
             />
-            {/* <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                        className="fas fa-calendar-alt fa-lg me-3"></i></a> */}
             <div>
               <button
                 type="button"

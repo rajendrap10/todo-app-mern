@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { loginValidation } from "../validations/validation";
 import { Context } from "../Context";
+import axiosConfig from "../utils/axiosConfig";
 
 const Login = () => {
 
@@ -11,7 +12,7 @@ const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const handleLogin = async () => {
       let checkValidation = loginValidation(email, password);
       if(checkValidation) {
@@ -20,7 +21,7 @@ const Login = () => {
           password
         }
         try {
-          await axios.post('/auth/login', postData)
+          axiosConfig.post('/auth/login', postData)
           .then((res) => {
             if (res.data.success) {
               toast.success(res.data.message, {

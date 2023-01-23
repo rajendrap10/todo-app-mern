@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 import { format } from 'date-fns'
 import { Context } from "../Context";
+import axiosConfig from "../utils/axiosConfig";
 
 const ToDoList = () => {
 
@@ -21,7 +22,7 @@ const ToDoList = () => {
     
     const fetchToDoList = async () => {
       if(token) {
-              await axios
+              await axiosConfig
                 .get("/getToDos/" + toDoState + "/" + toDoDate, {
                   headers: { Authorization: `Bearer ${token}` },
                 })
@@ -49,7 +50,7 @@ const ToDoList = () => {
 
     const delteToDo = async (_id) => {
       if(_id) {
-        await axios
+        await axiosConfig
           .delete("deleteToDo/" + _id, {
             headers: { Authorization: `Bearer ${token}` },
           })
@@ -81,7 +82,7 @@ const ToDoList = () => {
           id:_id,
           title:updateValue
         }
-        await axios
+        await axiosConfig
           .put("editToDo", updateData, {
             headers: { Authorization: `Bearer ${token}` },
           })
@@ -112,7 +113,7 @@ const ToDoList = () => {
           id:_id,
           isDone:target.checked
         }
-        await axios
+        await axiosConfig
           .put("toDoDone", data, {
             headers: { Authorization: `Bearer ${token}` },
           })

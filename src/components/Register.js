@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
-import { formValidation } from "../validations/validation"
+import { formValidation } from "../validations/validation";
+import axiosConfig from "../utils/axiosConfig";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const Register = () => {
     */
 
   const checkExistingUser = async (email) => {
-    const result = await axios.post("/auth/checkUser", { email })
+    const result = await axiosConfig.post("/auth/checkUser", { email })
       .then((res) => {
         console.log(res);
         if(res.data.success){
@@ -50,7 +51,7 @@ const Register = () => {
           password,
         };
 
-        await axios
+        await axiosConfig
           .post("/auth/register", userPostData)
           .then((res) => {
             console.log(res);
